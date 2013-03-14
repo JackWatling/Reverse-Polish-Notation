@@ -46,6 +46,24 @@ void solve(string entry){
 				values.push(a - b);
 				break;
 
+			case '*':
+				b = values.top();
+				values.pop();
+				a = values.top();
+				values.pop();
+
+				values.push(a * b);
+				break;
+
+			case '/':
+				b = values.top();
+				values.pop();
+				a = values.top();
+				values.pop();
+
+				values.push(a / b);
+				break;
+
 			case ' ':
 				break;
 
