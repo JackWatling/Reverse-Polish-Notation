@@ -21,9 +21,11 @@ int main()
 	getline(cin, entry);
 	istringstream iss(entry);
 
+	//Push words into vector
 	while(getline(iss, entry, ' '))
 		words.push_back(entry);
 
+	//Basic malform check
 	if (words.size() < 3)
 	{
 		cout << "Malformed" << endl;
@@ -45,25 +47,35 @@ void solve()
 		{
 			switch(words[i][0])
 			{
-			case '+':
-				values.push(values.pop() + values.pop());
-				break;
-			case '-':
-				values.push(-values.pop() + values.pop());
-				break;
-			case '*':
-				values.push(values.pop() * values.pop());
-				break;
-			case '/':
-				values.push((1.0f / values.pop()) * values.pop());
-				break;
-			default:
-				values.push(atoi(words[i].c_str()));
-				break;
+				//Addition
+				case '+':
+					values.push(values.pop() + values.pop());
+					break;
+
+				//Subtraction
+				case '-':
+					values.push(-values.pop() + values.pop());
+					break;
+
+				//Multiplication
+				case '*':
+					values.push(values.pop() * values.pop());
+					break;
+
+				//Division
+				case '/':
+					values.push((1.0f / values.pop()) * values.pop());
+					break;
+
+				//Numerical
+				default:
+					values.push(atoi(words[i].c_str()));
+					break;
 			}
 		}
 		else
 		{
+			//Numerical
 			values.push(atoi(words[i].c_str()));
 		}
 	}

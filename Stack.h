@@ -15,4 +15,8 @@ public:
 	//Accessors & Mutators
 	bool push(int value);
 	int pop();
+	int peek();
+
+	bool empty();
+	bool full();
 };
