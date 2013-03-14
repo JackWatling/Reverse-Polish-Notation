@@ -1,75 +1,82 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <stack>
+#include <vector>
 
 using namespace std;
 
 //Forward declarations
-void solve(string entry);
+void solve();
 
 //Stack
 stack<int> values;
+vector<string> words;
 
-int main(){
+int main()
+{
 	//Get input
 	string entry;
 	getline(cin, entry);
+	istringstream iss(entry);
+
+	while(getline(iss, entry, ' '))
+		words.push_back(entry);
 
 	//Solve
-	solve(entry);
+	solve();
 	cout << values.top() << endl;
 
 	return 0;
 }
 
-void solve(string entry){
+void solve()
+{
 	int a;	//Holds stack pop
 	int b;	//Holds stack pop
 
-	for(int i = 0; i < entry.size(); i++){
-		switch(entry[i]){
-			case '+':
-				b = values.top();
-				values.pop();
-				a = values.top();
-				values.pop();
+	for (int i = 0; i < words.size(); i++)
+	{
+		if (words[i][0] == '+')
+		{
+			b = values.top();
+			values.pop();
+			a = values.top();
+			values.pop();
 
-				values.push(a + b);
-				break;
+			values.push(a + b);
+		}
+		else if (words[i][0] == '-')
+		{
+			b = values.top();
+			values.pop();
+			a = values.top();
+			values.pop();
 
-			case '-':
-				b = values.top();
-				values.pop();
-				a = values.top();
-				values.pop();
+			values.push(a - b);
+		}
+		else if (words[i][0] == '*')
+		{
+			b = values.top();
+			values.pop();
+			a = values.top();
+			values.pop();
 
-				values.push(a - b);
-				break;
+			values.push(a * b);
+		}
+		else if (words[i][0] == '/')
+		{
+			b = values.top();
+			values.pop();
+			a = values.top();
+			values.pop();
 
-			case '*':
-				b = values.top();
-				values.pop();
-				a = values.top();
-				values.pop();
-
-				values.push(a * b);
-				break;
-
-			case '/':
-				b = values.top();
-				values.pop();
-				a = values.top();
-				values.pop();
-
-				values.push(a / b);
-				break;
-
-			case ' ':
-				break;
-
-			default:
-				values.push(entry[i] - 48);	//Converts ASCII value to number
-				break;
+			values.push(a / b);
+		}
+		else
+		{
+			values.push(atoi(words[i].c_str()));
 		}
 	}
+
 }
