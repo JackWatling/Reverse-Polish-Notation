@@ -23,6 +23,12 @@ int main()
 	while(getline(iss, entry, ' '))
 		words.push_back(entry);
 
+	if (words.size() < 3)
+	{
+		cout << "Malformed" << endl;
+		return 0;
+	}
+
 	//Solve
 	solve();
 	cout << values.top() << endl;
@@ -37,46 +43,46 @@ void solve()
 
 	for (int i = 0; i < words.size(); i++)
 	{
-		if (words[i][0] == '+')
+		if (words[i].length() == 1)
 		{
-			b = values.top();
-			values.pop();
-			a = values.top();
-			values.pop();
-
-			values.push(a + b);
-		}
-		else if (words[i][0] == '-')
-		{
-			b = values.top();
-			values.pop();
-			a = values.top();
-			values.pop();
-
-			values.push(a - b);
-		}
-		else if (words[i][0] == '*')
-		{
-			b = values.top();
-			values.pop();
-			a = values.top();
-			values.pop();
-
-			values.push(a * b);
-		}
-		else if (words[i][0] == '/')
-		{
-			b = values.top();
-			values.pop();
-			a = values.top();
-			values.pop();
-
-			values.push(a / b);
+			switch(words[i][0])
+			{
+			case '+':
+				b = values.top();
+				values.pop();
+				a = values.top();
+				values.pop();
+				values.push(a + b);
+				break;
+			case '-':
+				b = values.top();
+				values.pop();
+				a = values.top();
+				values.pop();
+				values.push(a - b);
+				break;
+			case '*':
+				b = values.top();
+				values.pop();
+				a = values.top();
+				values.pop();
+				values.push(a * b);
+				break;
+			case '/':
+				b = values.top();
+				values.pop();
+				a = values.top();
+				values.pop();
+				values.push(a / b);
+				break;
+			default:
+				values.push(atoi(words[i].c_str()));
+				break;
+			}
 		}
 		else
 		{
 			values.push(atoi(words[i].c_str()));
 		}
 	}
-
 }
