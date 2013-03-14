@@ -1,8 +1,9 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <stack>
 #include <vector>
+
+#include "Stack.h"
 
 using namespace std;
 
@@ -10,8 +11,8 @@ using namespace std;
 void solve();
 
 //Stack
-stack<int> values;
 vector<string> words;
+Stack values;
 
 int main()
 {
@@ -31,16 +32,13 @@ int main()
 
 	//Solve
 	solve();
-	cout << values.top() << endl;
+	cout << values.pop() << endl;
 
 	return 0;
 }
 
 void solve()
 {
-	int a;	//Holds stack pop
-	int b;	//Holds stack pop
-
 	for (int i = 0; i < words.size(); i++)
 	{
 		if (words[i].length() == 1)
@@ -48,32 +46,16 @@ void solve()
 			switch(words[i][0])
 			{
 			case '+':
-				b = values.top();
-				values.pop();
-				a = values.top();
-				values.pop();
-				values.push(a + b);
+				values.push(values.pop() + values.pop());
 				break;
 			case '-':
-				b = values.top();
-				values.pop();
-				a = values.top();
-				values.pop();
-				values.push(a - b);
+				values.push(-values.pop() + values.pop());
 				break;
 			case '*':
-				b = values.top();
-				values.pop();
-				a = values.top();
-				values.pop();
-				values.push(a * b);
+				values.push(values.pop() * values.pop());
 				break;
 			case '/':
-				b = values.top();
-				values.pop();
-				a = values.top();
-				values.pop();
-				values.push(a / b);
+				values.push((1.0f / values.pop()) * values.pop());
 				break;
 			default:
 				values.push(atoi(words[i].c_str()));
