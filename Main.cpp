@@ -29,19 +29,28 @@ void solve(string entry){
 	for(int i = 0; i < entry.size(); i++){
 		switch(entry[i]){
 			case '+':
-				a = values.top();
-				values.pop();
 				b = values.top();
 				values.pop();
+				a = values.top();
+				values.pop();
 
-				values.push((int)a + (int)b);
+				values.push(a + b);
+				break;
+
+			case '-':
+				b = values.top();
+				values.pop();
+				a = values.top();
+				values.pop();
+
+				values.push(a - b);
 				break;
 
 			case ' ':
 				break;
 
 			default:
-				values.push(entry[i] - 48);
+				values.push(entry[i] - 48);	//Converts ASCII value to number
 				break;
 		}
 	}
